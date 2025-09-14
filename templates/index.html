@@ -23,3 +23,28 @@
     {% endif %}
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SemaPulse</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>{{ message }}</h1>
+
+    <form action="/recommandation" method="post">
+        <input type="text" name="concept" placeholder="Entrez un concept" required>
+        <button type="submit">Obtenir recommandations</button>
+    </form>
+
+    {% if recommandations %}
+        <h2>Résultats :</h2>
+        <ul>
+        {% for idee in recommandations %}
+            <li>{{ idee }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
