@@ -1,3 +1,23 @@
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "message": "Bienvenue sur SemaPulse"})
+
+# Exemple d'endpoint pour les recommandations
+@app.post("/recommandation", response_class=HTMLResponse)
+async def recommandations(request: Request, concept: str = Form(...)):
+    # Ici, vous pouvez générer de vraies recommandations
+    data = ["Idée 1", "Idée 2", "Idée 3"]
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "message": f"Recommandations pour '{concept}'", "recommandations": data}
+    )
 
 from fastapi import FastAPI
 
